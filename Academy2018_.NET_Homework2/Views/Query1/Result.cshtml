@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Result";
+    ViewData["CurrentQuery"] = "1";
 }
 
 
@@ -19,24 +20,31 @@
         <input type="submit" class="btn btn-success" value="Search" />
     }
 
-    @if(Model.Result != null)
+    @if (Model.IsDataExist)
     {
-        <table>
-            <thead>
-            <tr>
-                <th>Post</th>
-                <th>Comments</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var item in Model.Result)
-            {
-                <tr>
-                    <td>@item.Post.Title</td>
-                    <td>@item.Comments</td>
-                </tr>
-            }
-            </tbody>
-        </table>
+        if (Model.Result != null)
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Post</th>
+                        <th>Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Result)
+                    {
+                        <tr>
+                            <td>@item.Post.Title</td>
+                            <td>@item.Comments</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+    else
+    {
+        <h3>Нет данных</h3>
     }
 </div>

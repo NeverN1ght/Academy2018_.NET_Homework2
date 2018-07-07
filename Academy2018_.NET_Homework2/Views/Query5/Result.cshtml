@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Result";
+    ViewData["CurrentQuery"] = "5";
 }
 
 <div id="queries" class="col-xs-3">
@@ -18,20 +19,28 @@
         <input type="submit" class="btn btn-success" value="Search" />
     }
 
-    @if (Model.Result != null)
+    @if (Model.IsDataExist)
     {
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>@Model.Result.User.Name</td>
-                </tr>
-            </tbody>
-        </table>
+        if (Model.Result != null)
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.Result.User.Name</td>
+                    </tr>
+                </tbody>
+            </table>
+        }
     }
+    else
+    {
+        <h3>Нет данных</h3>
+    }
+
 </div>
 

@@ -33,17 +33,26 @@ namespace Academy2018_.NET_Homework2.Controllers
         {
             if (ModelState.IsValid)
             {
-                var query = new DataQueryService(SharedData.Data);
-                var result = query.GetUserStructure(searchModel.Id);
-                searchModel.Result = new UserStructureDTO {
-                    User = result.User,
-                    LastPost = result.LastPost,
-                    LastPostCommentsCount = result.LastPostCommentsCount,
-                    MostPopularPostByComments = result.MostPopularPostByComments,
-                    MostPopularPostByLikes = result.MostPopularPostByLikes,
-                    UncompletedTodosCount = result.UncompletedTodosCount
-                };
-                return View(searchModel);
+                try
+                {
+                    var query = new DataQueryService(SharedData.Data);
+                    var result = query.GetUserStructure(searchModel.Id);
+                    searchModel.Result = new UserStructureDTO
+                    {
+                        User = result.User,
+                        LastPost = result.LastPost,
+                        LastPostCommentsCount = result.LastPostCommentsCount,
+                        MostPopularPostByComments = result.MostPopularPostByComments,
+                        MostPopularPostByLikes = result.MostPopularPostByLikes,
+                        UncompletedTodosCount = result.UncompletedTodosCount
+                    };
+                    return View(searchModel);
+                }
+                catch (InvalidOperationException)
+                {
+                    searchModel.IsDataExist = false;
+                    return View(searchModel);
+                }
             }
 
             return View(model);

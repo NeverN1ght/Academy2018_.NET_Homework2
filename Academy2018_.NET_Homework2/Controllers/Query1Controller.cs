@@ -32,9 +32,17 @@ namespace Academy2018_.NET_Homework2.Controllers
         {
             if (ModelState.IsValid)
             {
-                var query = new DataQueryService(SharedData.Data);
-                searchModel.Result = query.GetCommentsUnderUserPosts(searchModel.Id);
-                return View(searchModel);
+                try
+                {
+                    var query = new DataQueryService(SharedData.Data);
+                    searchModel.Result = query.GetCommentsUnderUserPosts(searchModel.Id);
+                    return View(searchModel);
+                }
+                catch (InvalidOperationException)
+                {
+                    searchModel.IsDataExist = false;
+                    return View(searchModel);
+                }
             }
 
             return View(model);
