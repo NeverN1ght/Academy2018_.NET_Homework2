@@ -1,0 +1,42 @@
+﻿@model SearchViewModel<List<(Post Post, int Comments)>>
+
+@{
+    ViewData["Title"] = "Result";
+}
+
+
+<div id="queries" class="col-xs-3">
+    @Html.Partial("QueriesPartial")
+</div>
+<div class="col-xs-8">
+    @using (Html.BeginForm("Result", "Query1", FormMethod.Post))
+    {
+        @Html.LabelFor(m => m.Id);
+        @Html.TextBoxFor(x => x.Id);
+        @Html.ValidationMessageFor(m => m.Id, "");
+
+        <br />
+        <input type="submit" class="btn btn-success" value="Search" />
+    }
+
+    @if(Model.Result != null)
+    {
+        <table>
+            <thead>
+            <tr>
+                <th>Post</th>
+                <th>Comments</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.Result)
+            {
+                <tr>
+                    <td>@item.Post.Title</td>
+                    <td>@item.Comments</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+</div>

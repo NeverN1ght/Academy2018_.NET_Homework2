@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Academy2018_.NET_Homework2.Models;
+using Academy2018_.NET_Homework2.Models.Domain;
 using Newtonsoft.Json;
 
 namespace Academy2018_.NET_Homework2.Services

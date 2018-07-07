@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Academy2018_.NET_Homework2.Models;
+using Academy2018_.NET_Homework2.Models.Domain;
 
 namespace Academy2018_.NET_Homework2.Services
 {

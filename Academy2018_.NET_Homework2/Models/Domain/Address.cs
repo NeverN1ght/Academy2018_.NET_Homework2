@@ -1,4 +1,4 @@
-﻿namespace Academy2018_.NET_Homework2.Models
+﻿namespace Academy2018_.NET_Homework2.Models.Domain
 {
     public class Address
     {

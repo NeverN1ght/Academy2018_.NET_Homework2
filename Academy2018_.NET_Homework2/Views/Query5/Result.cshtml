@@ -1,0 +1,37 @@
+﻿@model SearchViewModel<UserStructureDTO>
+
+@{
+    ViewData["Title"] = "Result";
+}
+
+<div id="queries" class="col-xs-3">
+    @Html.Partial("QueriesPartial")
+</div>
+<div class="col-xs-8">
+    @using (Html.BeginForm("Result", "Query5", FormMethod.Post))
+    {
+        @Html.LabelFor(m => m.Id);
+        @Html.TextBoxFor(x => x.Id);
+        @Html.ValidationMessageFor(m => m.Id, "");
+
+        <br />
+        <input type="submit" class="btn btn-success" value="Search" />
+    }
+
+    @if (Model.Result != null)
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.Result.User.Name</td>
+                </tr>
+            </tbody>
+        </table>
+    }
+</div>
+
