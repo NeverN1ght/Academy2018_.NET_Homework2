@@ -24,8 +24,6 @@ namespace Academy2018_.NET_Homework2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            //services.AddScoped<DataLoadService>();
-            //services.AddScoped<DataQueryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +48,7 @@ namespace Academy2018_.NET_Homework2
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
+            // Load data
             SharedData.Initialize();
         }
     }
