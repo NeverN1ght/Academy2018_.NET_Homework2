@@ -3,10 +3,13 @@
 }
 
 
-@Html.ActionLink("Запрос 1", "Result", "Query1", null, new { @class = "btn btn-block btn-default btn-lg" + ("1" == ViewData["CurrentQuery"] ? " btn-primary" : "") })
-@Html.ActionLink("Запрос 2", "Result", "Query2", null, new { @class = "btn btn-block btn-default btn-lg" + ("2" == ViewData["CurrentQuery"] ? " btn-primary" : "") })
-@Html.ActionLink("Запрос 3", "Result", "Query3", null, new { @class = "btn btn-block btn-default btn-lg" + ("3" == ViewData["CurrentQuery"] ? " btn-primary" : "") })
-@Html.ActionLink("Запрос 4", "Result", "Query4", null, new { @class = "btn btn-block btn-default btn-lg" + ("4" == ViewData["CurrentQuery"] ? " btn-primary" : "") })
-@Html.ActionLink("Запрос 5", "Result", "Query5", null, new { @class = "btn btn-block btn-default btn-lg" + ("5" == ViewData["CurrentQuery"] ? " btn-primary" : "") })
-@Html.ActionLink("Запрос 6", "Result", "Query6", null, new { @class = "btn btn-block btn-default btn-lg" + ("6" == ViewData["CurrentQuery"] ? " btn-primary" : "") })
+<div class="">
+    @Html.ActionLink("Query 1", "Result", "Query1", null, new { @class = "btn btn-block btn-default btn-lg" + ("1" == ViewData["CurrentQuery"] ? " btn-info" : "") })
+    @Html.ActionLink("Query 2", "Result", "Query2", null, new { @class = "btn btn-block btn-default btn-lg" + ("2" == ViewData["CurrentQuery"] ? " btn-info" : "") })
+    @Html.ActionLink("Query 3", "Result", "Query3", null, new { @class = "btn btn-block btn-default btn-lg" + ("3" == ViewData["CurrentQuery"] ? " btn-info" : "") })
+    @Html.ActionLink("Query 4", "Result", "Query4", null, new { @class = "btn btn-block btn-default btn-lg" + ("4" == ViewData["CurrentQuery"] ? " btn-info" : "") })
+    @Html.ActionLink("Query 5", "Result", "Query5", null, new { @class = "btn btn-block btn-default btn-lg" + ("5" == ViewData["CurrentQuery"] ? " btn-info" : "") })
+    @Html.ActionLink("Query 6", "Result", "Query6", null, new { @class = "btn btn-block btn-default btn-lg" + ("6" == ViewData["CurrentQuery"] ? " btn-info" : "") })
+</div>
+
 

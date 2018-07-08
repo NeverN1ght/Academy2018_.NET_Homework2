@@ -119,5 +119,26 @@ namespace Academy2018_.NET_Homework2.Services
                         .Count()
                     )).Single();
         }
+
+        // Entity queries
+        public User GetUserById(int userId)
+        {
+            return _dataHierarchy
+                .Find(u => u.Id == userId);
+        }
+
+        public Post GetPostById(int postId)
+        {
+            return _dataHierarchy
+                .SelectMany(u => u.Posts)
+                .FirstOrDefault(p => p.Id == postId);
+        }
+
+        public Todo GetTodoById(int todoId)
+        {
+            return _dataHierarchy
+                .SelectMany(u => u.Todos)
+                .FirstOrDefault(t => t.Id == todoId);
+        }
     }
 }

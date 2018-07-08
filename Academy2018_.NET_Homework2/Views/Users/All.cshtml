@@ -1,0 +1,26 @@
+﻿@model List<User>
+
+@{
+    ViewData["Title"] = "All";
+}
+
+<div class="container">
+    <table class="table table-hover">
+        <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td><img src="@user.Avatar" class="img-thumbnail img-rounded"/></td>
+                <td><h4>@Html.ActionLink(user.Name, "Profile", "Users", new { id = user.Id })</h4></td>
+                <td>
+                    <h4>
+                        <img src="~/images/cityscape.svg" width="30" height="30"/>
+                        @user.Address.City
+                    </h4>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+

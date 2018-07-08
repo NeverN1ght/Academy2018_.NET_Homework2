@@ -10,41 +10,55 @@
     @Html.Partial("QueriesPartial")
 </div>
 <div class="col-xs-8">
-    @using (Html.BeginForm("Result", "Query1", FormMethod.Post))
+    <p class="query-description">
+        Получить количество комментов под постами конкретного пользователя (по айди) (список из пост-количество)
+    </p>
+    @using (Html.BeginForm("Result", "Query1", FormMethod.Post, new {@class = "form-inline"}))
     {
-        @Html.LabelFor(m => m.Id);
-        @Html.TextBoxFor(x => x.Id);
-        @Html.ValidationMessageFor(m => m.Id, "");
-
-        <br />
-        <input type="submit" class="btn btn-success" value="Search" />
+        <label>
+            Enter user's id
+        </label>
+        <br/>
+        @Html.TextBoxFor(x => x.Id, new {@class = "form-control", @type = "search", @placeholder = "Search"})
+        <input type="submit" class="btn btn-success" value="Search"/>
+        <br/>
+        @Html.ValidationMessageFor(m => m.Id)
     }
+    
+    <br/>
 
     @if (Model.IsDataExist)
     {
         if (Model.Result != null)
         {
-            <table>
-                <thead>
-                    <tr>
-                        <th>Post</th>
-                        <th>Comments</th>
+            if (Model.Result.Count > 0)
+            {
+                <table class="table table-bordered">
+                    <thead>
+                    <tr class="info">
+                        <th scope="col">Post title</th>
+                        <th scope="col">Comments count</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     @foreach (var item in Model.Result)
                     {
                         <tr>
-                            <td>@item.Post.Title</td>
+                            <td>@Html.ActionLink($"\"{item.Post.Title}\"", "Info", "Posts", new {id = item.Post.Id}, new { target = "_blank" })</td>
                             <td>@item.Comments</td>
                         </tr>
                     }
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <h4>There's no data found</h4>
+            }
         }
     }
     else
     {
-        <h3>Нет данных</h3>
+        <h4>There's no data found</h4>
     }
 </div>

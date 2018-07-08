@@ -3,18 +3,46 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="~/lib/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
-    <title>@ViewData["Title"];</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link href="~/css/site.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <title>@ViewData["Title"]</title>
 </head>
 <body>
-    <nav class="navbar navbar-inverse" role="navigation">       
-        <a class="navbar-brand" href="#">Name</a>
-        @Html.ActionLink("Искать", "Result", "Query1", null, new { @class = "navbar-brand"})
-        <a class="navbar-brand" href="#">Информация</a>
-    </nav>
-    <div class="row panel">
-        @RenderBody()
+    <div>
+        <nav class="navbar navigation" role="navigation">                   
+            <a href='@Url.Action("Index", "Home")' class="navbar-brand navigation-item">
+                <div>
+                    <img src="~/images/goal.svg" height="30" width="30"/>
+                    Home
+                </div>
+            </a>
+            <a href='@Url.Action("All", "Users")' class="navbar-brand navigation-item">
+                <div>
+                    <img src="~/images/group.svg" height="30" width="30"/>
+                    Our users
+                </div>
+            </a>
+            <a href='@Url.Action("Result", "Query1")' class="navbar-brand navigation-item">
+                <div>
+                    <img src="~/images/search.svg" height="30" width="30"/>
+                    Search
+                </div>
+            </a>
+            <a href='@Url.Action("Information", "Home")' class="navbar-brand navigation-item">
+                <div>
+                    <img src="~/images/rgb.svg" height="30" width="30"/>
+                    Information
+                </div>
+            </a>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="">
+            @RenderBody()
+        </div>
     </div>
 </body>
 </html>

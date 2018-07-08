@@ -2,6 +2,15 @@
     ViewData["Title"] = "Home";
 }
 
-<div>
-    This is Home page!
+<div class="container">
+    <div class="row">
+        <h2>This is test web app, where you can do some queries and get a response</h2>
+    </div>
+    <div class="row">
+        <img src="~/images/money-bag.svg" width="300" height="300" class="col-xs-4"/>
+        <img src="~/images/money-bag.svg" width="300" height="300" class="col-xs-4"/>
+        <img src="~/images/money-bag.svg" width="300" height="300" class="col-xs-4"/>
+    </div>
+    <br/>
+    @Html.ActionLink("Try it now for free!", "Result", "Query1", null, new { @class = "btn btn-success btn-block btn-lg" })
 </div>

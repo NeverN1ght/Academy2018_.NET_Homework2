@@ -16,5 +16,10 @@ namespace Academy2018_.NET_Homework2.Controllers
         {
             return View();
         }
+
+        public IActionResult Information()
+        {
+            return View();
+        }
     }
 }
