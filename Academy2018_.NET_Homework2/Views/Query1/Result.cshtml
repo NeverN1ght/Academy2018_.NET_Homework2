@@ -1,0 +1,64 @@
+﻿@model SearchViewModel<List<(Post Post, int Comments)>>
+
+@{
+    ViewData["Title"] = "Result";
+    ViewData["CurrentQuery"] = "1";
+}
+
+
+<div id="queries" class="col-xs-3">
+    @Html.Partial("QueriesPartial")
+</div>
+<div class="col-xs-8">
+    <p class="query-description">
+        Получить количество комментов под постами конкретного пользователя (по айди) (список из пост-количество)
+    </p>
+    @using (Html.BeginForm("Result", "Query1", FormMethod.Post, new {@class = "form-inline"}))
+    {
+        <label>
+            Enter user's id
+        </label>
+        <br/>
+        @Html.TextBoxFor(x => x.Id, new {@class = "form-control", @type = "search", @placeholder = "Search"})
+        <input type="submit" class="btn btn-success" value="Search"/>
+        <br/>
+        @Html.ValidationMessageFor(m => m.Id)
+    }
+    
+    <br/>
+
+    @if (Model.IsDataExist)
+    {
+        if (Model.Result != null)
+        {
+            if (Model.Result.Count > 0)
+            {
+                <table class="table table-bordered">
+                    <thead>
+                    <tr class="info">
+                        <th scope="col">Post title</th>
+                        <th scope="col">Comments count</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.Result)
+                    {
+                        <tr>
+                            <td>@Html.ActionLink($"\"{item.Post.Title}\"", "Info", "Posts", new {id = item.Post.Id}, new { target = "_blank" })</td>
+                            <td>@item.Comments</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <h4>There's no data found</h4>
+            }
+        }
+    }
+    else
+    {
+        <h4>There's no data found</h4>
+    }
+</div>

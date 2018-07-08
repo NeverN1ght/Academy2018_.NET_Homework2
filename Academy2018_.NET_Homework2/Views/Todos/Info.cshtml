@@ -1,0 +1,35 @@
+﻿@model Todo
+
+@{
+    ViewData["Title"] = "Info";
+}
+
+<div class="container bg-info profile-container">
+    <div class="row profile-item">
+        <h2>
+            "@Model.Name"
+        </h2>
+    </div>
+    <div class="row profile-item">
+        <h4>
+            <img src="~/images/calendar.svg" width="25" height="25"/>
+            Created: @Model.CreatedAt
+        </h4>
+    </div>
+    <div class="row profile-item">
+        <h4>
+            <img src="~/images/bar-chart.svg" width="25" height="25"/>
+            Status:
+            @if (Model.IsComplete)
+            {
+                @:Complete 
+                <img src="~/images/checked.svg" height="25" width="25"/>
+            }
+            else
+            {
+                @:In progress 
+                <img src="~/images/push-pin.svg" height="25" width="25"/>
+            }
+        </h4>
+    </div>
+</div>

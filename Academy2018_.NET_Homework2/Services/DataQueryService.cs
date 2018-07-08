@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Academy2018_.NET_Homework2.Models;
+using Academy2018_.NET_Homework2.Models.Domain;
 
 namespace Academy2018_.NET_Homework2.Services
 {
@@ -117,6 +118,27 @@ namespace Academy2018_.NET_Homework2.Services
                         .Select(c => c)
                         .Count()
                     )).Single();
+        }
+
+        // Entity queries
+        public User GetUserById(int userId)
+        {
+            return _dataHierarchy
+                .Find(u => u.Id == userId);
+        }
+
+        public Post GetPostById(int postId)
+        {
+            return _dataHierarchy
+                .SelectMany(u => u.Posts)
+                .FirstOrDefault(p => p.Id == postId);
+        }
+
+        public Todo GetTodoById(int todoId)
+        {
+            return _dataHierarchy
+                .SelectMany(u => u.Todos)
+                .FirstOrDefault(t => t.Id == todoId);
         }
     }
 }

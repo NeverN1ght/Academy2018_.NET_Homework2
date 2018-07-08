@@ -1,0 +1,75 @@
+﻿@model SearchViewModel<UserStructureDTO>
+
+@{
+    ViewData["Title"] = "Result";
+    ViewData["CurrentQuery"] = "5";
+}
+
+<div id="queries" class="col-xs-3">
+    @Html.Partial("QueriesPartial")
+</div>
+<div class="col-xs-8">
+    <p class="query-description">
+        Получить следующую структуру (передать Id пользователя в параметры)
+        <ul>
+            <li><p class="query-description query-item">User</p></li>
+            <li><p class="query-description query-item">Последний пост пользователя (по дате)</p></li>
+            <li><p class="query-description query-item">Количество комментов под последним постом</p></li>
+            <li><p class="query-description query-item">Количество невыполненных тасков для пользователя</p></li>
+            <li><p class="query-description query-item">Самый популярный пост пользователя (там где больше всего комментов с длиной текста больше 80 символов)</p></li>
+            <li><p class="query-description query-item">Самый популярный пост пользователя (там где больше всего лайков)</p></li>
+        </ul>
+    </p>
+    @using (Html.BeginForm("Result", "Query5", FormMethod.Post, new { @class = "form-inline" }))
+    {
+        <label>
+            Enter user's id
+        </label>
+        <br/>
+        @Html.TextBoxFor(x => x.Id, new { @class = "form-control", @type = "search", @placeholder = "Search" })
+        <input type="submit" class="btn btn-success" value="Search"/>
+        <br/>
+        @Html.ValidationMessageFor(m => m.Id)
+    }
+    
+    <br/>
+
+    @if (Model.IsDataExist)
+    {
+        if (Model.Result != null)
+        {
+            <table class="table table-bordered">
+                <tr>
+                    <th scope="col" class="info">User name</th>
+                    <td>@Html.ActionLink(Model.Result.User.Name, "Profile", "Users", new { id = Model.Result.User.Id }, new { target = "_blank" })</td>               
+                </tr>
+                <tr>
+                    <th scope="col" class="info">Last post</th>
+                    <td>@Html.ActionLink($"\"{Model.Result.LastPost.Title}\"", "Info", "Posts", new { id = Model.Result.LastPost.Id }, new { target = "_blank" })</td>
+                </tr>
+                <tr>
+                    <th scope="col" class="info">Last post comments count</th>
+                    <td>@Model.Result.LastPostCommentsCount</td>
+                </tr>
+                <tr>
+                    <th scope="col" class="info">Uncompleted tasks</th>
+                    <td>@Model.Result.UncompletedTodosCount</td>
+                </tr>
+                <tr>
+                    <th scope="col" class="info">Most popular post by comments</th>
+                    <td>@Html.ActionLink($"\"{Model.Result.MostPopularPostByComments.Title}\"", "Info", "Posts", new { id = Model.Result.MostPopularPostByComments.Id }, new { target = "_blank" })</td>
+                </tr>
+                <tr>
+                    <th scope="col" class="info">Most popular post by likes</th>
+                    <td>@Html.ActionLink($"\"{Model.Result.MostPopularPostByLikes.Title}\"", "Info", "Posts", new { id = Model.Result.MostPopularPostByLikes.Id }, new { target = "_blank" })</td>
+                </tr>
+            </table>
+        }
+    }
+    else
+    {
+         <h4>There's no data found</h4>
+    }
+
+</div>
+

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Academy2018_.NET_Homework2.Data;
+using Academy2018_.NET_Homework2.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -45,6 +47,9 @@ namespace Academy2018_.NET_Homework2
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            // Load data
+            SharedData.Initialize();
         }
     }
 }

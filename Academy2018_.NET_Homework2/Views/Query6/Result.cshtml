@@ -1,0 +1,64 @@
+﻿@model SearchViewModel<PostStructureDTO>
+
+@{
+    ViewData["Title"] = "Result";
+    ViewData["CurrentQuery"] = "6";
+}
+
+<div id="queries" class="col-xs-3">
+    @Html.Partial("QueriesPartial")
+</div>
+<div class="col-xs-8">
+    <p class="query-description">
+        Получить следующую структуру (передать Id поста в параметры)
+        <ul>
+            <li><p class="query-description query-item">Пост</p></li>
+            <li><p class="query-description query-item">Самый длинный коммент поста</p></li>
+            <li><p class="query-description query-item">Самый залайканный коммент поста</p></li>
+            <li><p class="query-description query-item">Количество комментов под постом где или 0 лайков или длина текста < 80</p></li>
+        </ul>
+    </p>
+    @using (Html.BeginForm("Result", "Query6", FormMethod.Post, new { @class = "form-inline" }))
+    {
+        <label>
+            Enter post's id
+        </label>
+        <br/>
+        @Html.TextBoxFor(x => x.Id, new { @class = "form-control", @type = "search", @placeholder = "Search" })
+        <input type="submit" class="btn btn-success" value="Search"/>
+        <br/>
+        @Html.ValidationMessageFor(m => m.Id)
+    }
+    
+    <br/>
+
+    @if (Model.IsDataExist)
+    {
+        if (Model.Result != null)
+        {
+            <table class="table table-bordered">
+                <tr>
+                    <th scope="col" class="info">Post title</th>
+                    <td>@Html.ActionLink($"\"{Model.Result.Post.Title}\"", "Info", "Posts", new { id = Model.Result.Post.Id }, new { target = "_blank" })</td>               
+                </tr>
+                <tr>
+                    <th scope="col" class="info">Longest comment</th>
+                    <td>"@Model.Result.LongestComment.Body"</td>
+                </tr>
+                <tr>
+                    <th scope="col" class="info">Most liked comment</th>
+                    <td>"@Model.Result.MostLikedComment.Body"</td>
+                </tr>
+                <tr>
+                    <th scope="col" class="info">Comments count under bad post</th>
+                    <td>@Model.Result.CommentsCountUnderBadPost</td>
+                </tr>
+            </table>
+        }
+    }
+    else
+    {
+        <h4>There's no data found</h4>
+    }
+</div>
+

@@ -1,0 +1,91 @@
+﻿@model User
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="container bg-info profile-container">
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="profile-ava">
+                <img src="@Model.Avatar" class="img-thumbnail img-rounded"/>
+            </div>
+        </div>
+        <div class="col-xs-8">
+            <h3>@Model.Name</h3>
+            <h5>
+                <img src="~/images/envelope.svg" width="25" height="25"/>
+                <b>Email:</b> @Model.Email
+            </h5>
+            <h5>
+                <img src="~/images/earth-globe.svg" width="25" height="25" />
+                <b>Country:</b> @Model.Address.Country
+            </h5>
+            <h5>
+                <img src="~/images/calendar.svg" width="25" height="25" />
+                <b>Registered:</b> @Model.CreatedAt
+            </h5>
+        </div>
+    </div>
+    <br/>
+    <div class="row profile-item">
+        <div class="col-xs-4">
+            <a for="posts" data-toggle="collapse" href="#posts" aria-expanded="true" aria-controls="posts" class="btn btn-link">
+                <h4>
+                    <img src="~/images/pen.svg" width="25" height="25" />
+                    Posts
+                </h4>
+            </a>
+            <div id="posts" class="collapse">
+                <ul class="list-group">
+                    @foreach (var post in Model.Posts)
+                    {
+                    <li class="list-group-item">
+                        @Html.ActionLink($"\"{post.Title}\"", "Info", "Posts", new { id = post.Id })
+                    </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row profile-item">
+        <div class="col-xs-4">
+            <a for="todos" data-toggle="collapse" href="#todos" aria-expanded="true" aria-controls="todos" class="btn btn-link">
+                <h4>
+                    <img src="~/images/checklist.svg" width="25" height="25" />
+                    Todos
+                </h4>
+            </a>
+            <div id="todos" class="collapse">
+                <ul class="list-group">
+                    @foreach (var todo in Model.Todos)
+                    {
+                        <li class="list-group-item">
+                            @Html.ActionLink($"\"{todo.Name}\"", "Info", "Todos", new { id = todo.Id })
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row profile-item">
+        <div class="col-xs-7">
+            <a for="comments" data-toggle="collapse" href="#comments" aria-expanded="true" aria-controls="comments" class="btn btn-link">
+                <h4>
+                    <img src="~/images/conversation.svg" width="25" height="25" />
+                    Comments
+                </h4>
+            </a>
+            <div id="comments" class="collapse">
+                <ul class="list-group">
+                    @foreach (var comment in Model.Comments)
+                    {
+                        <li class="list-group-item">
+                            <p style="font-style: italic">"@comment.Body"</p>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

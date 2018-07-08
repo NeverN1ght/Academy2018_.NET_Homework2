@@ -1,0 +1,66 @@
+﻿@model SearchViewModel<List<Comment>>
+
+@{
+    ViewData["Title"] = "Result";
+    ViewData["CurrentQuery"] = "2";
+}
+
+<div id="queries" class="col-xs-3">
+    @Html.Partial("QueriesPartial")
+</div>
+<div class="col-xs-8">
+    <p class="query-description">
+        Получить список комментов под постами конкретного пользователя (по айди), где body коммента < 50 символов (список из комментов)
+    </p>
+    @using (Html.BeginForm("Result", "Query2", FormMethod.Post, new { @class = "form-inline" }))
+    {
+        <label>
+            Enter user's id
+        </label>
+        <br/>
+        @Html.TextBoxFor(x => x.Id, new { @class = "form-control", @type = "search", @placeholder = "Search" })
+        <input type="submit" class="btn btn-success" value="Search"/>
+        <br/>
+        @Html.ValidationMessageFor(m => m.Id)
+    }
+    
+    <br/>
+
+    @if (Model.IsDataExist)
+    {
+        if (Model.Result != null)
+        {
+            if (Model.Result.Count > 0)
+            {
+                <table class="table table-bordered">
+                    <thead>
+                    <tr class="info">
+                        <th scope="col">Comment body</th>
+                        <th scope="col">Creation date</th>
+                        <th scope="col">Likes count</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.Result)
+                    {
+                        <tr>
+                            <td>"@item.Body"</td>
+                            <td>@item.CreatedAt</td>
+                            <td>@item.Likes</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <h4>There's no data found</h4>
+            }
+        }
+    }
+    else
+    {
+        <h4>There's no data found</h4>
+    }
+</div>
+
