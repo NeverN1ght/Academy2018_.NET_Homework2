@@ -16,17 +16,17 @@ namespace Academy2018_.NET_Homework2.Services
         public List<(Post Post, int Comments)> GetCommentsUnderUserPosts(int userId)
         {
             return _dataHierarchy
-                .Where(u => u.Id == userId)
-                .SelectMany(u => u.Posts)
-                .Select(p => (Post: p, CommentsCount: p.Comments.Count))
+                .FirstOrDefault(u => u.Id == userId)
+                .Posts
+                .Select(p => (Post: p, Comments: p.Comments.Count))
                 .ToList();
         }
 
         public List<Comment> GetCommentsWithSmallBody(int userId)
         {
             return _dataHierarchy
-                .Where(u => u.Id == userId)
-                .SelectMany(u => u.Posts)
+                .FirstOrDefault(u => u.Id == userId)
+                .Posts
                 .SelectMany(p => p.Comments)
                 .Where(c => c.Body.Length < 50)
                 .ToList();
@@ -35,8 +35,8 @@ namespace Academy2018_.NET_Homework2.Services
         public List<(int Id, string Name)> GetCompletedTodos(int userId)
         {
             return _dataHierarchy
-                .Where(u => u.Id == userId)
-                .SelectMany(u => u.Todos)
+                .FirstOrDefault(u => u.Id == userId)
+                .Todos
                 .Where(t => t.IsComplete)
                 .Select(t => (Id: t.Id, Name: t.Name))
                 .ToList();
